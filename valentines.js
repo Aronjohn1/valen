@@ -1,15 +1,15 @@
-// ------------------ Firebase Setup ------------------
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
+//  Firebase Setup
+import { initializeApp } from "";
+import { getDatabase, ref, set } from "";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyBv6QW_cpN8iGG37z1mjncFF6zS47hJvpU",
-    authDomain: "valentines-9fa7f.firebaseapp.com",
-    databaseURL: "https://valentines-9fa7f-default-rtdb.firebaseio.com",
-    projectId: "valentines-9fa7f",
-    storageBucket: "valentines-9fa7f.firebasestorage.app",
-    messagingSenderId: "602343444211",
-    appId: "1:602343444211:web:c7779d6c6dde188cd3f186"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
   };
   
 const app = initializeApp(firebaseConfig);
@@ -21,7 +21,7 @@ function saveData(id,data){
       .catch(err => console.error("Error saving:", err));
 }
 
-// ------------------ Helpers ------------------
+
 function getParams(){ return new URLSearchParams(window.location.search); }
 
 function createFlowers(){
@@ -38,7 +38,7 @@ function createFlowers(){
     }
 }
 
-// ------------------ INDEX.HTML ------------------
+// INDEX.HTML
 function initIndexPage(){
     const createBtn=document.getElementById('createBtn');
     const downloadBtn=document.getElementById('downloadBtn');
@@ -48,8 +48,9 @@ function initIndexPage(){
         const from=document.getElementById('from').value.trim();
         const to=document.getElementById('to').value.trim();
         if(!from||!to) { alert("Fill both names!"); return; }
-
-        const url=`https://valentines-kappa-eosin.vercel.app/date.html?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+      
+//This is for date.html. insert your link github or vercel like for example https://valentines-kappa-eosin.vercel.app/date.html
+        const url=`?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
         document.getElementById('qrcode').innerHTML='';
         new QRCode(document.getElementById('qrcode'),{text:url,width:200,height:200});
 
@@ -69,7 +70,7 @@ function initIndexPage(){
 
 
 
-// ------------------ DATE.HTML ------------------
+// DATE.HTML
 function initDatePage(){
     if(!document.getElementById('details')) return;
 
@@ -79,9 +80,9 @@ function initDatePage(){
     const toName=urlParams.get('to')||'You';
 
     const inviteText=document.getElementById('inviteText');
-    if(inviteText) inviteText.innerText=`💌 ${fromName} invites ${toName} on Valentine’s Day! 💌`;
+    if(inviteText) inviteText.innerText=` ${fromName} invites ${toName} on Valentine’s Day! `;
 
-    // Removed play music button code since using autoplay
+    
 
     const cancelBtn=document.getElementById('cancelCardBtn');
     if(cancelBtn) cancelBtn.addEventListener('click',()=>{
@@ -100,8 +101,8 @@ function initDatePage(){
         const location=document.getElementById('location').value||'Unknown location';
         const time=document.getElementById('time').value||'Unknown time';
         const outfit=document.getElementById('outfit').value||'Any color';
-
-        const resultURL=`https://valentines-kappa-eosin.vercel.app/result.html?from=${encodeURIComponent(fromName)}&to=${encodeURIComponent(toName)}&location=${encodeURIComponent(location)}&time=${encodeURIComponent(time)}&outfit=${encodeURIComponent(outfit)}`;
+//this is for result html. insert your link github or vercel like for example https://valentines-kappa-eosin.vercel.app/result.html
+        const resultURL=`?from=${encodeURIComponent(fromName)}&to=${encodeURIComponent(toName)}&location=${encodeURIComponent(location)}&time=${encodeURIComponent(time)}&outfit=${encodeURIComponent(outfit)}`;
 
         document.getElementById('finalQR').innerHTML='';
         new QRCode(document.getElementById('finalQR'),{text:resultURL,width:200,height:200});
@@ -128,7 +129,7 @@ function playMusic() {
 
 
 window.answer = function(choice){
-    playMusic(); // 🔊 start music here
+    playMusic(); 
 
     if(choice === 'A' || choice === 'B' || choice === 'C' || choice === 'D'){
         document.getElementById('question').classList.add('hidden');
@@ -139,7 +140,7 @@ window.answer = function(choice){
     }
 };
 
-// ------------------ RESULT.HTML ------------------
+// RESULT.HTML 
 function initResultPage(){
     const resEl=document.getElementById('result');
     if(!resEl) return;
@@ -154,7 +155,7 @@ function initResultPage(){
     resEl.innerText=`From: ${fromName}\nTo: ${toName}\nLocation: ${location}\nTime: ${time}\nOutfit Color: ${outfit}`;
 }
 
-// ------------------ INIT ------------------
+//  INIT
 document.addEventListener('DOMContentLoaded',()=>{
     initIndexPage();
     initDatePage();
